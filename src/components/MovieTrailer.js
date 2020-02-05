@@ -1,14 +1,10 @@
 import React from 'react';
 import YouTube from 'react-youtube';
 
-// function MovieTrailer({ movie }) {
-//   return <div className="MovieTrailer">MovieTrailer</div>;
-// }
-
 class MovieTrailer extends React.Component {
   constructor(videoID) {
     super();
-    this.videoID = videoID;
+    this.videoID = '2g811Eo7K8U';
   }
 
   render() {
@@ -24,8 +20,7 @@ class MovieTrailer extends React.Component {
     return (
       <YouTube
         className="MovieTrailer"
-        // videoId={this.videoID}
-        videoId="2g811Eo7K8U"
+        videoId={this.videoID}
         opts={opts}
         onReady={this._onReady}
       />
