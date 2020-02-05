@@ -1,38 +1,38 @@
-import React, { useState, useEffect } from "react";
-import "./App.css";
-import Header from "./Header";
-import TrailerContainer from "./TrailerContainer";
+import React, { useState, useEffect } from 'react';
+import './App.css';
+import Header from './Header';
+import TrailerContainer from './TrailerContainer';
 
 function App() {
   const searchOptions = {
     key: process.env.REACT_APP_TMD_KEY,
-    api: "https://api.themoviedb.org/3/movie/now_playing",
-    language: "en-US",
+    api: 'https://api.themoviedb.org/3/movie/now_playing',
+    language: 'en-US',
     page: 1
   };
 
-  const [data, setData] = useState([]);
+  const [nowPlaying, setNowPlaying] = useState([]);
 
   useEffect(() => {
-    getData();
-  }, [getData]);
+    getNowPlaying();
+  }, []);
 
-  function getData() {
+  function getNowPlaying() {
     const url = `${searchOptions.api}?api_key=${searchOptions.key}&language=${searchOptions.language}&page=${searchOptions.page}`;
-    console.log("getData", url);
-
-    // fetch(url)
-    //   .then(response => response.json())
-    //   .then(response => {
-    //     setImages(response.data);
-    //   })
-    //   .catch(console.error);
+    console.log('getNowPlaying', url);
+    fetch(url)
+      .then(res => res.json())
+      .then(res => {
+        console.log('getNowPlaying res', res);
+        setNowPlaying(res);
+      })
+      .catch(console.error);
   }
 
   return (
     <div className="App">
       <Header />
-      <TrailerContainer />
+      {/* <TrailerContainer setNowPlaying={setNowPlaying} /> */}
     </div>
   );
 }
