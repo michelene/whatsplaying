@@ -9,26 +9,20 @@ View trailers and text descriptions for movies currently playing in theaters.
 - In addition to the trailer, there will be fixed size text description link for each movie, which will be expandable to display the full description.
 - The app will work seamlessly between desktop and mobile.
 
-## Technologies Used (MVP)
-
-- I will use themoviedb.org's API to grab info.
-- I will use iFrames to allow trailers to play on the page.
-- I will grab trailers from YouTube (unless I can find another free source) and use video embeds within each iFrame.
-- I might be able to grab trailers from this YouTube channel: [Movie Trailers9](https://www.youtube.com/channel/UCelnA9HEb_exfG-U4EZS-8A/about)
-- I might possibly use this package: https://www.npmjs.com/package/react-youtube .
-
-## Technologies Used (Beyond MVP)
-
-- I might possibly scrape data from Fandango's free RSS feeds, and feed that data into themoviedb's API.
-- For the 'Near Me' (non-MVP) feature, I will use the Fandango RSS feed to grab data, then I will parse the XML data into a format which is usable by the app. (See https://www.fandango.com/rss/moviesnearme_95409.rss)
-- For the 'Auto-determine Zip Code' (non-MVP) feature, I will possibly use `navigator.geolocation.getCurrentPostion` and `position.address.postalCode`.
-
 ## APIs used (MVP)
-
-## APIs Used
 
 - [TMDb](https://www.themoviedb.org/documentation/api)
 - [YouTube Data API v3](https://developers.google.com/youtube/v3/getting-started)
+
+## Other Technologies Used (MVP)
+
+- [react-youtube NPM package](https://www.npmjs.com/package/react-youtube)
+  - This contains built-in iFrames to allow embedded playback
+
+## Technologies Used (Beyond MVP)
+
+- For the 'Near Me' (non-MVP) feature, I will use the Fandango RSS feed to grab data, then I will parse the XML data into a format which is usable by the app. (See https://www.fandango.com/rss/moviesnearme_95409.rss)
+- For the 'Auto-determine Zip Code' (non-MVP) feature, I will possibly use `navigator.geolocation.getCurrentPostion` and `position.address.postalCode`.
 
 ## Wireframes
 

@@ -4,7 +4,8 @@ import YouTube from 'react-youtube';
 class MovieTrailer extends React.Component {
   constructor(videoID) {
     super();
-    this.videoID = '2g811Eo7K8U';
+    // this.videoID = '2g811Eo7K8U';
+    this.videoID = videoID;
   }
 
   render() {
@@ -16,6 +17,8 @@ class MovieTrailer extends React.Component {
         autoplay: 0
       }
     };
+
+    console.log('hello ', this.videoID);
 
     return (
       <YouTube

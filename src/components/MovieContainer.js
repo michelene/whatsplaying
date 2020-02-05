@@ -7,9 +7,15 @@ function MovieContainer({ movie, searchOpts }) {
   const movieTitle = movie.original_title;
   const movieOverview = movie.overview;
   const releaseDate = movie.release_date;
-  const videoID = '2g811Eo7K8U';
+  // const videoID = '2g811Eo7K8U';
 
   console.log(movieTitle);
+
+  // Query YT to find videos matching `${movieTitle} trailer`:
+  let getVideoID = movieTitle => {
+    return '2g811Eo7K8U';
+  };
+  let videoID = getVideoID(movieTitle);
 
   return (
     <div className="MovieContainer">
