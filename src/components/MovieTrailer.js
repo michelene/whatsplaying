@@ -1,39 +1,31 @@
 import React from 'react';
 import YouTube from 'react-youtube';
 
-class MovieTrailer extends React.Component {
-  constructor(videoID) {
-    super();
-    // this.videoID = '2g811Eo7K8U';
-    this.videoID = videoID;
-  }
+function MovieTrailer({ videoID }) {
+  const opts = {
+    height: '113',
+    width: '200',
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 0
+    }
+  };
 
-  render() {
-    const opts = {
-      height: '113',
-      width: '200',
-      playerVars: {
-        // https://developers.google.com/youtube/player_parameters
-        autoplay: 0
-      }
-    };
-
-    console.log('hello ', this.videoID);
-
-    return (
-      <YouTube
-        className="MovieTrailer"
-        videoId={this.videoID}
-        opts={opts}
-        onReady={this._onReady}
-      />
-    );
-  }
-
-  _onReady(event) {
+  function _onReady(event) {
     // access to player in all event handlers via event.target
     event.target.pauseVideo();
   }
+
+  // TODO: Display just the thumbnails, then when the thumbnail is clicked, load the video.
+  // Video loading seems slow.
+  return (
+    <YouTube
+      className="MovieTrailer"
+      videoId={videoID}
+      opts={opts}
+      onReady={_onReady}
+    />
+  );
 }
 
 export default MovieTrailer;

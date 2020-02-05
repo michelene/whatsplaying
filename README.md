@@ -17,7 +17,7 @@ View trailers and text descriptions for movies currently playing in theaters.
 ## Other Technologies Used (MVP)
 
 - [react-youtube NPM package](https://www.npmjs.com/package/react-youtube)
-  - This contains built-in iFrames to allow embedded playback
+  - This package contains built-in iFrames to allow embedded playback
 
 ## Technologies Used (Beyond MVP)
 
