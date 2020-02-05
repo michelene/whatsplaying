@@ -19,12 +19,12 @@ function App() {
 
   function getNowPlaying() {
     const url = `${searchOptions.api}?api_key=${searchOptions.key}&language=${searchOptions.language}&page=${searchOptions.page}`;
-    console.log('getNowPlaying', url);
     fetch(url)
       .then(res => res.json())
       .then(res => {
-        console.log('getNowPlaying res', res);
-        setNowPlaying(res);
+        // the API response contains an array named 'results'
+        setNowPlaying(res.results);
+        console.log('getNowPlaying res.results', res.results);
       })
       .catch(console.error);
   }
@@ -32,7 +32,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      {/* <TrailerContainer setNowPlaying={setNowPlaying} /> */}
+      <TrailerContainer nowPlaying={nowPlaying} />
     </div>
   );
 }

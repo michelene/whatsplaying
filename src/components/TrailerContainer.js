@@ -8,7 +8,8 @@ import Description from './Description';
 // Populate those into individual Description objects.
 
 function TrailerContainer(props) {
-  const { nowPlaying } = props;
+  const { setNowPlaying, nowPlaying } = props;
+  console.log('TrailerContainer', nowPlaying);
 
   if (nowPlaying.length === 0) {
     return null;
