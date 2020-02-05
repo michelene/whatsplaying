@@ -8,6 +8,7 @@ import YouTube from 'react-youtube';
 class MovieTrailer extends React.Component {
   render() {
     const opts = {
+      height: '113',
       width: '200',
       playerVars: {
         // https://developers.google.com/youtube/player_parameters
@@ -16,7 +17,12 @@ class MovieTrailer extends React.Component {
     };
 
     return (
-      <YouTube videoId="2g811Eo7K8U" opts={opts} onReady={this._onReady} />
+      <YouTube
+        className="MovieTrailer"
+        videoId="2g811Eo7K8U"
+        opts={opts}
+        onReady={this._onReady}
+      />
     );
   }
 
