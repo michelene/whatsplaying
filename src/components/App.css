@@ -1,5 +1,24 @@
 .App {
+  margin: 0 auto;
+}
+
+.Header {
   display: grid;
-  grid-template-columns: 3;
-  grid-template-rows: 2;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.1fr;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+.TrailerContainer {
+  display: flex;
+}
+
+.Trailer {
+}
+
+.TrailerDescription {
 }
