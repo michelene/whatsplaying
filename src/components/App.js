@@ -4,10 +4,11 @@ import Header from './Header';
 import MoviesContainer from './MoviesContainer';
 
 function App() {
-  const searchOptions = {
-    tmdKey: process.env.REACT_APP_TMD_API,
-    ytKey: process.env.REACT_APP_YT_API,
-    api: 'https://api.themoviedb.org/3/movie/now_playing',
+  const searchOpts = {
+    tmdb_APIKey: process.env.REACT_APP_TMD_API,
+    tmdb_baseURL: 'https://api.themoviedb.org/3/movie/now_playing',
+    yt_APIKey: process.env.REACT_APP_YT_API,
+    yt_baseURL: 'https://www.googleapis.com/youtube/v3/search',
     language: 'en-US',
     page: 1
   };
@@ -19,7 +20,7 @@ function App() {
   }, []);
 
   function getNowPlaying() {
-    const url = `${searchOptions.api}?api_key=${searchOptions.tmdKey}&language=${searchOptions.language}&page=${searchOptions.page}`;
+    const url = `${searchOpts.tmdb_baseURL}?api_key=${searchOpts.tmdb_APIKey}&language=${searchOpts.language}&page=${searchOpts.page}`;
     fetch(url)
       .then(res => res.json())
       .then(res => {
@@ -36,6 +37,7 @@ function App() {
         <MoviesContainer
           nowPlaying={nowPlaying}
           setNowPlaying={setNowPlaying}
+          searchOpts={searchOpts}
         />
         {/* TODO: Add Footer component */}
       </div>

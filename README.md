@@ -14,7 +14,7 @@ View trailers and text descriptions for movies currently playing in theaters.
 - I will use themoviedb.org's API to grab info.
 - I will use iFrames to allow trailers to play on the page.
 - I will grab trailers from YouTube (unless I can find another free source) and use video embeds within each iFrame.
-- I might be able to grab trailers from this YouTube channel: https://www.youtube.com/user/movieclipsTRAILERS/videos
+- I might be able to grab trailers from this YouTube channel: [Movie Trailers9](https://www.youtube.com/channel/UCelnA9HEb_exfG-U4EZS-8A/about)
 - I might possibly use this package: https://www.npmjs.com/package/react-youtube .
 
 ## Technologies Used (Beyond MVP)

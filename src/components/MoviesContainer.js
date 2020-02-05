@@ -7,8 +7,9 @@ import MovieContainer from './MovieContainer';
 // Populate those into individual Description objects.
 
 function MoviesContainer(props) {
-  const { setNowPlaying, nowPlaying } = props;
+  const { setNowPlaying, nowPlaying, searchOpts } = props;
   console.log('MoviesContainer', nowPlaying);
+  console.log('MoviesContainer', searchOpts.yt_baseURL);
 
   if (nowPlaying.length === 0) {
     return null;
