@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './Header';
-import TrailerContainer from './TrailerContainer';
+import MoviesContainer from './MoviesContainer';
 
 function App() {
   const searchOptions = {
@@ -24,16 +24,18 @@ function App() {
       .then(res => {
         // the API response contains an array named 'results'
         setNowPlaying(res.results);
-        console.log('getNowPlaying res.results', res.results);
       })
       .catch(console.error);
   }
 
   return (
-    <div className="App">
-      <Header />
-      <TrailerContainer nowPlaying={nowPlaying} />
-    </div>
+    <>
+      <div className="App">
+        <Header />
+        <MoviesContainer nowPlaying={nowPlaying} />
+        {/* TODO: Add Footer component */}
+      </div>
+    </>
   );
 }
 
