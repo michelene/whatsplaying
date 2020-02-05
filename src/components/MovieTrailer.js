@@ -6,6 +6,11 @@ import YouTube from 'react-youtube';
 // }
 
 class MovieTrailer extends React.Component {
+  constructor(videoID) {
+    super();
+    this.videoID = videoID;
+  }
+
   render() {
     const opts = {
       height: '113',
@@ -19,6 +24,7 @@ class MovieTrailer extends React.Component {
     return (
       <YouTube
         className="MovieTrailer"
+        // videoId={this.videoID}
         videoId="2g811Eo7K8U"
         opts={opts}
         onReady={this._onReady}
