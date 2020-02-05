@@ -1,14 +1,15 @@
 import React from 'react';
 import MovieTrailer from './MovieTrailer';
-import MovieDescription from './MovieDescription';
+import MovieOverview from './MovieOverview';
 
 function MovieContainer({ movie }) {
   const movieTitle = movie.original_title;
+  const movieOverview = movie.overview;
   return (
     <div className="MovieContainer">
-      {movieTitle}
+      <h2>{movieTitle}</h2>
       <MovieTrailer />
-      <MovieDescription />
+      <MovieOverview movieOverview={movieOverview} />
     </div>
   );
 }
