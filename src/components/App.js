@@ -5,7 +5,8 @@ import MoviesContainer from './MoviesContainer';
 
 function App() {
   const searchOptions = {
-    key: process.env.REACT_APP_TMD_KEY,
+    tmdKey: process.env.REACT_APP_TMD_API,
+    ytKey: process.env.REACT_APP_YT_API,
     api: 'https://api.themoviedb.org/3/movie/now_playing',
     language: 'en-US',
     page: 1
@@ -18,7 +19,7 @@ function App() {
   }, []);
 
   function getNowPlaying() {
-    const url = `${searchOptions.api}?api_key=${searchOptions.key}&language=${searchOptions.language}&page=${searchOptions.page}`;
+    const url = `${searchOptions.api}?api_key=${searchOptions.tmdKey}&language=${searchOptions.language}&page=${searchOptions.page}`;
     fetch(url)
       .then(res => res.json())
       .then(res => {

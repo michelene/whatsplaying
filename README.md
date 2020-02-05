@@ -23,6 +23,13 @@ View trailers and text descriptions for movies currently playing in theaters.
 - For the 'Near Me' (non-MVP) feature, I will use the Fandango RSS feed to grab data, then I will parse the XML data into a format which is usable by the app. (See https://www.fandango.com/rss/moviesnearme_95409.rss)
 - For the 'Auto-determine Zip Code' (non-MVP) feature, I will possibly use `navigator.geolocation.getCurrentPostion` and `position.address.postalCode`.
 
+## APIs used (MVP)
+
+## APIs Used
+
+- [TMDb](https://www.themoviedb.org/documentation/api)
+- [YouTube Data API v3](https://developers.google.com/youtube/v3/getting-started)
+
 ## Wireframes
 
 - (Coming soon)
