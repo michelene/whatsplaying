@@ -9,10 +9,6 @@
   text-align: center;
 }
 
-h1 {
-  font-size: 2rem;
-}
-
 .MoviesContainer {
   width: 95%;
   max-width: 1000px;
@@ -24,4 +20,31 @@ h1 {
 
 .MovieContainer {
   border: 1px solid magenta;
+}
+
+.MovieTitle {
+  font-size: 1.25rem;
+  text-align: center;
+  font-weight: 600;
+  padding: 0.25em;
+}
+
+.Released {
+  font-style: italic;
+  font-size: 0.75rem;
+  text-align: center;
+  margin-top: 0em;
+}
+
+.MovieTrailer {
+  margin: 5px;
+  /* TODO: Remove text-align once we insert the trailer */
+  text-align: center;
+}
+
+.MovieOverview {
+  font-style: italic;
+  font-size: 0.85rem;
+  margin: 5px;
+  text-align: center;
 }

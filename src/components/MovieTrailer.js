@@ -1,6 +1,6 @@
 import React from 'react';
 
-function MovieTrailer() {
+function MovieTrailer({ movie }) {
   return <div className="MovieTrailer">MovieTrailer</div>;
 }
 

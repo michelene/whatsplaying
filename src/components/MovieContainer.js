@@ -1,14 +1,16 @@
 import React from 'react';
+import MovieTitle from './MovieTitle';
 import MovieTrailer from './MovieTrailer';
 import MovieOverview from './MovieOverview';
 
 function MovieContainer({ movie }) {
   const movieTitle = movie.original_title;
   const movieOverview = movie.overview;
+  const releaseDate = movie.release_date;
   return (
     <div className="MovieContainer">
-      <h2>{movieTitle}</h2>
-      <MovieTrailer />
+      <MovieTitle movieTitle={movieTitle} releaseDate={releaseDate} />
+      <MovieTrailer movie={movie} />
       <MovieOverview movieOverview={movieOverview} />
     </div>
   );

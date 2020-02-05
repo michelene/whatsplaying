@@ -32,7 +32,10 @@ function App() {
     <>
       <div className="App">
         <Header />
-        <MoviesContainer nowPlaying={nowPlaying} />
+        <MoviesContainer
+          nowPlaying={nowPlaying}
+          setNowPlaying={setNowPlaying}
+        />
         {/* TODO: Add Footer component */}
       </div>
     </>
