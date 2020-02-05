@@ -16,7 +16,7 @@ function MoviesContainer(props) {
   return (
     <div className="MoviesContainer">
       {nowPlaying.map((item, idx) => (
-        <MovieContainer key={idx} />
+        <MovieContainer key={idx} movie={item} />
       ))}
     </div>
   );
