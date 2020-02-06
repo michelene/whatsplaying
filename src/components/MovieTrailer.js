@@ -16,6 +16,8 @@ function MovieTrailer({ videoID }) {
     event.target.pauseVideo();
   }
 
+  console.log('in MovieTrailer, ', videoID);
+
   // TODO: Display just the thumbnails, then when the thumbnail is clicked, load the video.
   // Video loading seems slow.
   return (

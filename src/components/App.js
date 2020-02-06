@@ -22,9 +22,10 @@ function App() {
       .then(res => {
         // the API response contains an array named 'results'
         // setNowPlaying(res.results);
-        // For testing, return an array of one element:
-        let myArr = res.results.slice(0, 2);
-        setNowPlaying(myArr);
+        // TESTING ONLY: return an array of just 2 element
+        // let myArr = res.results.slice(0, 2);
+        // let myArr = res.results.slice(0, 2);
+        setNowPlaying(res.results);
       })
       .catch(console.error);
   };
