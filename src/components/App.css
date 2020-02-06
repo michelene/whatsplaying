@@ -9,6 +9,14 @@
   text-align: center;
 }
 
+h1 {
+  margin-bottom: 0;
+}
+
+h3 {
+  font-style: italic;
+}
+
 .MoviesContainer {
   width: 95%;
   max-width: 1000px;

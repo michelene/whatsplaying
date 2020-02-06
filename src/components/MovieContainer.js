@@ -3,19 +3,12 @@ import MovieTitle from './MovieTitle';
 import MovieTrailer from './MovieTrailer';
 import MovieOverview from './MovieOverview';
 
-function MovieContainer({ movie, searchOpts }) {
+function MovieContainer({ movie, videoID }) {
   const movieTitle = movie.original_title;
   const movieOverview = movie.overview;
   const releaseDate = movie.release_date;
-  // const videoID = '2g811Eo7K8U';
 
-  console.log(movieTitle);
-
-  // Query YT to find videos matching `${movieTitle} trailer`:
-  let getVideoID = movieTitle => {
-    return '2g811Eo7K8U';
-  };
-  let videoID = getVideoID(movieTitle);
+  console.log('videoID is ', videoID);
 
   return (
     <div className="MovieContainer">

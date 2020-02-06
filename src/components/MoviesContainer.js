@@ -8,16 +8,41 @@ import MovieContainer from './MovieContainer';
 
 function MoviesContainer(props) {
   const { setNowPlaying, nowPlaying, searchOpts } = props;
-  console.log('MoviesContainer', nowPlaying);
-  console.log('MoviesContainer', searchOpts.yt_baseURL);
 
   if (nowPlaying.length === 0) {
     return null;
   }
+
+  // Append to each entry of nowPlaying
+  // a videoId, retrieved from YT query
+  let getVideoID = movie => {
+    let searchStr = `${movie.original_title} official trailer`;
+    // NOTE: encodeURIComponent() will incorrectly encode foreign language titles
+    const regexp = / /g;
+    let encStr = searchStr.replace(regexp, '%20');
+    let url = `${searchOpts.yt_baseURL}?key=${searchOpts.yt_APIKey}&part=snippet&q=${encStr}`;
+    fetch(url)
+      .then(res => res.json())
+      .then(res => {
+        let topVidID = res.items[0].id.videoId;
+        return topVidID;
+        // return '2g811Eo7K8U';
+      })
+      .catch(console.error);
+  };
+  // getVideoID('bad boys for life');
+  // nowPlaying[0].videoID = 'jKCj3XuPG8M';
+
+  let newArr = [];
+  let videoIDs = nowPlaying.map(movie => {
+    let newID = getVideoID(movie);
+    console.log(newID);
+  });
+
   return (
     <div className="MoviesContainer">
       {nowPlaying.map((item, idx) => (
-        <MovieContainer key={idx} movie={item} />
+        <MovieContainer key={idx} movie={item} videoID={'jKCj3XuPG8M'} />
       ))}
     </div>
   );

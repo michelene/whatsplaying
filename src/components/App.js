@@ -15,20 +15,23 @@ function App() {
 
   const [nowPlaying, setNowPlaying] = useState([]);
 
-  useEffect(() => {
-    getNowPlaying();
-  }, []);
-
-  function getNowPlaying() {
+  let getNowPlaying = () => {
     const url = `${searchOpts.tmdb_baseURL}?api_key=${searchOpts.tmdb_APIKey}&language=${searchOpts.language}&page=${searchOpts.page}`;
     fetch(url)
       .then(res => res.json())
       .then(res => {
         // the API response contains an array named 'results'
-        setNowPlaying(res.results);
+        // setNowPlaying(res.results);
+        // For testing, return an array of one element:
+        let myArr = res.results.slice(0, 2);
+        setNowPlaying(myArr);
       })
       .catch(console.error);
-  }
+  };
+
+  useEffect(() => {
+    getNowPlaying();
+  }, []);
 
   return (
     <>
