@@ -10,6 +10,8 @@ function MoviesContainer(props) {
 
   let videoIDs = [];
 
+  // Making the fetch await, and putting inside an async function, ensures
+  // that when I populate the videoIDs array, the data is there.
   let awaitfetch = async url => {
     await fetch(url)
       .then(res => res.json())
@@ -35,6 +37,8 @@ function MoviesContainer(props) {
     });
   };
 
+  // getVideoIDs is wrapped in a React Effect
+  // because it contains async (API) calls
   useEffect(() => {
     getVideoIDs(nowPlaying);
     console.log('in MoviesContainer, videoIDs', videoIDs);
@@ -43,7 +47,7 @@ function MoviesContainer(props) {
   return (
     <div className="MoviesContainer">
       {nowPlaying.map((item, idx) => (
-        <MovieContainer key={idx} movie={item} />
+        <MovieContainer key={idx} movie={item} videoId={videoIDs[idx]} />
       ))}
     </div>
   );

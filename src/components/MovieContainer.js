@@ -3,12 +3,10 @@ import MovieTitle from './MovieTitle';
 import MovieTrailer from './MovieTrailer';
 import MovieOverview from './MovieOverview';
 
-function MovieContainer({ movie }) {
+function MovieContainer({ movie, videoID }) {
   const movieTitle = movie.original_title;
   const movieOverview = movie.overview;
   const releaseDate = movie.release_date;
-  // const videoID = movie.yt_id.toString();
-  const videoID = movie.yt_id;
 
   console.log('in MovieContainer, ', movie);
   console.log('in MovieContainer, ', videoID);
