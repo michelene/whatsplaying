@@ -4,7 +4,9 @@ import Header from './Header';
 import MoviesContainer from './MoviesContainer';
 
 function App() {
-  const searchOpts = {
+  // Putting searchOptVals into global state so that I can access it from a
+  // subcomponent 2 levels down:
+  const searchOptVals = {
     tmdb_APIKey: process.env.REACT_APP_TMD_API,
     tmdb_baseURL: 'https://api.themoviedb.org/3/movie/now_playing',
     yt_APIKey: process.env.REACT_APP_YT_API,
@@ -14,6 +16,7 @@ function App() {
   };
 
   const [nowPlaying, setNowPlaying] = useState([]);
+  const [searchOpts, setSearchOpts] = useState(searchOptVals);
 
   let getNowPlaying = () => {
     const url = `${searchOpts.tmdb_baseURL}?api_key=${searchOpts.tmdb_APIKey}&language=${searchOpts.language}&page=${searchOpts.page}`;
@@ -21,11 +24,12 @@ function App() {
       .then(res => res.json())
       .then(res => {
         // the API response contains an array named 'results'
+        // THE REAL CODE:
         // setNowPlaying(res.results);
-        // TESTING ONLY: return an array of just 2 element
+        // THE TESTING ONLY CODE: Return an array of just 2 element
         // let myArr = res.results.slice(0, 2);
-        // let myArr = res.results.slice(0, 2);
-        setNowPlaying(res.results);
+        let myArr = res.results.slice(0, 2);
+        setNowPlaying(myArr);
       })
       .catch(console.error);
   };
