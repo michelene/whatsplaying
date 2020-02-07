@@ -28,7 +28,8 @@ View trailers and text descriptions for movies currently playing in theaters.
 
 ## Wireframes
 
-- (Coming soon)
+- [Desktop](./wireframe-desktop.png)
+- [Mobile](./wireframe-mobile.png)
 
 ## User Stories
 
