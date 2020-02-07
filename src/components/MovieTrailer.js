@@ -15,15 +15,14 @@ function MovieTrailer({ movieTitle }) {
       autoplay: 0
     }
   };
-
-  let videoID = '';
+  var videoID = '';
 
   // getVideoID is wrapped in a React Effect
   // because it contains async (API) calls
   useEffect(() => {
-    let videoID = getVideoID(movieTitle);
+    videoID = getVideoID(movieTitle);
     console.log('in MovieTrailer, videoID', videoID);
-  });
+  }, []);
 
   function _onReady(event) {
     // access to player in all event handlers via event.target
@@ -46,6 +45,7 @@ function MovieTrailer({ movieTitle }) {
   let getVideoID = movieTitle => {
     let searchStr = `${movieTitle} official trailer`;
     // NOTE: encodeURIComponent() will incorrectly encode foreign language titles, so just encode spaces
+    // Might need to strip out special characters e.g. '(', ')', etc.
     const regexp = / /g;
     let encStr = searchStr.replace(regexp, '%20');
     let url = `${searchOpts.yt_baseURL}?key=${searchOpts.yt_APIKey}&part=snippet&q=${encStr}`;
@@ -54,22 +54,30 @@ function MovieTrailer({ movieTitle }) {
     fetch(url)
       .then(res => res.json())
       .then(res => {
-        let topVidID = res.items[0].id.videoId;
-        console.log('the correct topVidID is ', topVidID);
-        return topVidID;
+        // let topVidID = res.items[0].id.videoId;
+        // return topVidID;
+        // console.log('the correct topVidID is ', topVidID);
+        let videoID = res.items[0].id.videoId;
+        console.log('the correct videoID is ', videoID);
+        return videoID;
       })
       .catch(console.error);
+    return videoID;
   };
 
   // TODO: Display just the thumbnails, then when the thumbnail is clicked, load the video.
   // Video loading seems slow.
   return (
-    <YouTube
-      className="MovieTrailer"
-      videoId={videoID}
-      opts={opts}
-      onReady={_onReady}
-    />
+    <>
+      {/* {videoID && ( */}
+      <YouTube
+        className="MovieTrailer"
+        videoId={videoID}
+        opts={opts}
+        onReady={_onReady}
+      />
+      {/* )} */}
+    </>
   );
 }
 
