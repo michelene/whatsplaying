@@ -9,6 +9,13 @@
   text-align: center;
 }
 
+.Footer {
+  margin-top: 1em;
+  text-align: center;
+  font-size: 0.5rem;
+  font-style: italic;
+}
+
 h1 {
   margin-bottom: 0;
 }

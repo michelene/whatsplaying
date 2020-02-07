@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import YouTube from 'react-youtube';
 
-function MovieTrailer({ videoID }) {
+function MovieTrailer({ movieTitle }) {
+  const searchOpts = {
+    yt_APIKey: process.env.REACT_APP_YT_API,
+    yt_baseURL: 'https://www.googleapis.com/youtube/v3/search'
+  };
+
   const opts = {
     height: '113',
     width: '200',
@@ -11,12 +16,50 @@ function MovieTrailer({ videoID }) {
     }
   };
 
+  let videoID = '';
+
+  // getVideoID is wrapped in a React Effect
+  // because it contains async (API) calls
+  useEffect(() => {
+    let videoID = getVideoID(movieTitle);
+    console.log('in MovieTrailer, videoID', videoID);
+  });
+
   function _onReady(event) {
     // access to player in all event handlers via event.target
     event.target.pauseVideo();
   }
 
-  console.log('in MovieTrailer, ', videoID);
+  // Making the fetch await, and putting inside an async function, ensures
+  // that when I populate the videoIDs array, the data is there.
+  // let awaitfetch = async url => {
+  //   await fetch(url)
+  //     .then(res => res.json())
+  //     .then(res => {j
+  //       let topVidID = res.items[0].id.videoId;
+  //       console.log('the correct topVidID is ', topVidID);
+  //       return topVidID;
+  //     })
+  //     .catch(console.error);
+  // };
+
+  let getVideoID = movieTitle => {
+    let searchStr = `${movieTitle} official trailer`;
+    // NOTE: encodeURIComponent() will incorrectly encode foreign language titles, so just encode spaces
+    const regexp = / /g;
+    let encStr = searchStr.replace(regexp, '%20');
+    let url = `${searchOpts.yt_baseURL}?key=${searchOpts.yt_APIKey}&part=snippet&q=${encStr}`;
+    console.log('in Trailer, url is ', url);
+    // awaitfetch(url);
+    fetch(url)
+      .then(res => res.json())
+      .then(res => {
+        let topVidID = res.items[0].id.videoId;
+        console.log('the correct topVidID is ', topVidID);
+        return topVidID;
+      })
+      .catch(console.error);
+  };
 
   // TODO: Display just the thumbnails, then when the thumbnail is clicked, load the video.
   // Video loading seems slow.

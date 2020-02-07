@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './Header';
+import Footer from './Footer';
 import MoviesContainer from './MoviesContainer';
 
 function App() {
-  // Putting searchOptVals into global state so that I can access it from a
-  // subcomponent 2 levels down:
-  const searchOptVals = {
+  const searchOpts = {
     tmdb_APIKey: process.env.REACT_APP_TMD_API,
     tmdb_baseURL: 'https://api.themoviedb.org/3/movie/now_playing',
     yt_APIKey: process.env.REACT_APP_YT_API,
@@ -16,16 +15,16 @@ function App() {
   };
 
   const [nowPlaying, setNowPlaying] = useState([]);
-  const [searchOpts, setSearchOpts] = useState(searchOptVals);
 
   let getNowPlaying = () => {
     const url = `${searchOpts.tmdb_baseURL}?api_key=${searchOpts.tmdb_APIKey}&language=${searchOpts.language}&page=${searchOpts.page}`;
     fetch(url)
       .then(res => res.json())
       .then(res => {
-        // the API response contains an array named 'results'
+        // The API response contains an array named 'results'
         // THE REAL CODE:
         // setNowPlaying(res.results);
+        //
         // THE TESTING ONLY CODE: Return an array of just 2 element
         // let myArr = res.results.slice(0, 2);
         let myArr = res.results.slice(0, 2);
@@ -39,17 +38,11 @@ function App() {
   }, []);
 
   return (
-    <>
-      <div className="App">
-        <Header />
-        <MoviesContainer
-          nowPlaying={nowPlaying}
-          setNowPlaying={setNowPlaying}
-          searchOpts={searchOpts}
-        />
-        {/* TODO: Add Footer component */}
-      </div>
-    </>
+    <div className="App">
+      <Header />
+      <MoviesContainer movies={nowPlaying} />
+      <Footer />
+    </div>
   );
 }
 
