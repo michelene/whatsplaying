@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import YouTube from 'react-youtube';
 
 function MovieTrailer({ movieTitle }) {
@@ -15,13 +15,11 @@ function MovieTrailer({ movieTitle }) {
       autoplay: 0
     }
   };
-  var videoID = '';
 
-  // getVideoID is wrapped in a React Effect
-  // because it contains async (API) calls
+  const [videoID, setVideoID] = useState('');
+
   useEffect(() => {
-    videoID = getVideoID(movieTitle);
-    console.log('in MovieTrailer, videoID', videoID);
+    getVideoID(movieTitle);
   }, []);
 
   function _onReady(event) {
@@ -29,54 +27,35 @@ function MovieTrailer({ movieTitle }) {
     event.target.pauseVideo();
   }
 
-  // Making the fetch await, and putting inside an async function, ensures
-  // that when I populate the videoIDs array, the data is there.
-  // let awaitfetch = async url => {
-  //   await fetch(url)
-  //     .then(res => res.json())
-  //     .then(res => {j
-  //       let topVidID = res.items[0].id.videoId;
-  //       console.log('the correct topVidID is ', topVidID);
-  //       return topVidID;
-  //     })
-  //     .catch(console.error);
-  // };
-
   let getVideoID = movieTitle => {
     let searchStr = `${movieTitle} official trailer`;
     // NOTE: encodeURIComponent() will incorrectly encode foreign language titles, so just encode spaces
     // Might need to strip out special characters e.g. '(', ')', etc.
+    // Although, looks like the search which included parens returned the correct trailer...so maybe not
     const regexp = / /g;
     let encStr = searchStr.replace(regexp, '%20');
     let url = `${searchOpts.yt_baseURL}?key=${searchOpts.yt_APIKey}&part=snippet&q=${encStr}`;
-    console.log('in Trailer, url is ', url);
-    // awaitfetch(url);
     fetch(url)
       .then(res => res.json())
       .then(res => {
-        // let topVidID = res.items[0].id.videoId;
-        // return topVidID;
-        // console.log('the correct topVidID is ', topVidID);
-        let videoID = res.items[0].id.videoId;
-        console.log('the correct videoID is ', videoID);
-        return videoID;
+        let topVidID = res.items[0].id.videoId;
+        setVideoID(topVidID);
       })
       .catch(console.error);
-    return videoID;
   };
 
-  // TODO: Display just the thumbnails, then when the thumbnail is clicked, load the video.
-  // Video loading seems slow.
+  // TODO: Video loading seems slow; the API takes a while to return.
+  // Can it be optimized?
   return (
     <>
-      {/* {videoID && ( */}
-      <YouTube
-        className="MovieTrailer"
-        videoId={videoID}
-        opts={opts}
-        onReady={_onReady}
-      />
-      {/* )} */}
+      {{ videoID } && (
+        <YouTube
+          className="MovieTrailer"
+          videoId={videoID}
+          opts={opts}
+          onReady={_onReady}
+        />
+      )}
     </>
   );
 }
