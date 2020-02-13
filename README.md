@@ -1,6 +1,7 @@
 # whatsplaying
 
 View trailers and text descriptions for movies currently playing in theaters.
+[Heroku link](https://whatsplaying-movies.herokuapp.com/)
 
 ## Project Description
 
