@@ -3,9 +3,9 @@
 }
 
 .Header {
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 0.1fr;
+  grid-template-rows: 0.1fr; */
   text-align: center;
 }
 
@@ -30,6 +30,20 @@ h3 {
   margin: 0 auto;
   display: grid;
   grid-gap: 1rem;
+  /* I ❤️ that you're using repeat here! 
+     Personally, I would make it a bit larger, 
+     so that the video or images are bigger.
+     You can add the grid in a single media query
+     at something like 476px and remove the grid-template-columns
+     setting here entirely.  It will default to the
+     natural container width (essentially 1fr).
+     then at the end of your css add:
+     @media (min-width: 476px) {
+      .MoviesContainer {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      }  
+     }
+  */
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 }
 
@@ -65,4 +79,79 @@ h3 {
   font-size: 0.85rem;
   margin: 5px;
   text-align: center;
+}
+
+/* Make the video responsive */
+/* Here's how this works: 
+   The markup produced by the react-youtube container is:
+   <div> <- Add the responsive-video class here with the containerClassName prop 
+     <iframe></frame>
+   </div>
+  
+   The `div` container is set to width 100% so it fills
+   the space available to it by its parent container.
+   It also has position relative set so that it sets the 
+   context for any child element (the iframe in this case)
+   when position absolute is used.
+
+   Then we use a ::before pseudo element, this injects a 
+   new element into the page as the first child of the div
+   (so before the iframe).  When set to display block, it
+   will naturally take up the whole width of its parent,
+   which in this case is the container div with the class of 
+   responsive-video.  Every pseudo element MUST have a 
+   content property or they will not be injected into the page,
+   so we just set it to an empty string.
+
+   The real trick here is that we give this element padding-top
+   set to 56.25%.  CSS calculates this by determining the current
+   width of the element and then multiplying it by 56.25.  In CSS,
+   padding percentages are always calculated as a % of the element's
+   width even when applied to the top or bottom.  That means that 
+   if the current width is 100px the padding added to the top will
+   be 56.25px and thus the empty ::before element's height and width
+   will always be exactly in a ratio of 16:9 -- the same as 
+   the dimensions of a video.
+
+   Since the ::before element is being placed inside the div, it makes
+   the div at least as tall as ::before element with the padding applied.
+   Now, we use the .responsive-video > iframe selector to select the
+   iframe that is the first child of the div with the .responsive-video
+   class and tell it to position itself absolutely.  This removes the
+   video from the document flow (meaning it won't care about other elements
+   before or after it and can overlap them).  Setting the height and
+   width both to 100% starting at 0 in the top left corner of its parent (because
+   the parent has position relative set on it that will be the element it will
+   use as its starting point for the top, bottom, left and/or right properties), ensures that the iframe fills the entire  .responsive-video container. The 
+   result is that the iframe will always retain a perfect 16:9 ratio 
+   and scale to fit the width of your card perfectly. 
+*/
+
+.responsive-video {
+  display: block;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+
+.responsive-video::before {
+  content: '';
+  display: block;
+  padding-top: 56.25%;
+}
+
+.responsive-video > iframe {
+  border: 0;
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.responsive-video > * {
+  cursor: pointer;
+  object-fit: cover;
 }
